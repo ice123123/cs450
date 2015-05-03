@@ -20,7 +20,7 @@ import weka.core.Instances;
 public class KNNClassifier extends Classifier{
 
     
-    Integer k = 50;
+    Integer k = 5;
     Instances data;
     TreeMap<Double,Integer> map;
     
