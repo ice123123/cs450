@@ -66,9 +66,14 @@ public class KNNClassifier extends Classifier{
     
     double EuclideanDistance(Instance instanceLHS, Instance instanceRHS){
         double distance = 0;
-        for(int i = 0; i < instanceLHS.numAttributes() && i < instanceRHS.numAttributes(); i++){
+        for(int i = 0; i < instanceLHS.numAttributes() -1 && i < instanceRHS.numAttributes() - 1 ; i++){
             if(instanceLHS.attribute(i).isNumeric() && instanceRHS.attribute(i).isNumeric()){
                 distance += pow(instanceLHS.value(i) - instanceRHS.value(i), 2);
+            } else {
+                if(instanceLHS.stringValue(i).equals(instanceRHS.stringValue(i))) {
+                    distance += 0;    
+                }
+                    distance += 1;            
             }
         }
         
