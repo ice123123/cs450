@@ -9,6 +9,8 @@ import java.util.Random;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Standardize;
 
 
 /**
@@ -17,7 +19,9 @@ import weka.core.converters.ConverterUtils.DataSource;
  */
 public class ExperimentShell {
 
-    static String file = "lib/iris.csv";
+    static final String file = "lib/iris.csv";
+    //static final String file = "lib/carData.csv";
+    
     
     /**
      * @param args the command line arguments
@@ -28,7 +32,7 @@ public class ExperimentShell {
         
         //Set up data
         dataSet.setClassIndex(dataSet.numAttributes() - 1);
-        dataSet.randomize(new Random(1));
+        dataSet.randomize(new Random());
         
         //determine sizes
         int trainingSize = (int) Math.round(dataSet.numInstances() * .7);
@@ -38,11 +42,17 @@ public class ExperimentShell {
         
         Instances test = new Instances(dataSet, trainingSize, testSize);
         
-        HardCodedClassifier hcc = new HardCodedClassifier();
-        hcc.buildClassifier(training);
+        Standardize standardizedData = new Standardize();
+        standardizedData.setInputFormat(training);        
         
-        Evaluation eval = new Evaluation(training);
-        eval.evaluateModel(hcc, test);
+        Instances newTest = Filter.useFilter(test, standardizedData);
+        Instances newTraining = Filter.useFilter(training, standardizedData);
+        
+        KNNClassifier knn = new KNNClassifier();
+        knn.buildClassifier(newTraining);
+        
+        Evaluation eval = new Evaluation(newTraining);
+        eval.evaluateModel(knn, newTest);
         
         System.out.println(eval.toSummaryString("\nResults\n======\n", false));
     }
