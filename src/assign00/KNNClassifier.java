@@ -20,7 +20,7 @@ import weka.core.Instances;
 public class KNNClassifier extends Classifier{
 
     
-    Integer k = 1;
+    Integer k = 50;
     Instances data;
     TreeMap<Double,Integer> map;
     
@@ -73,7 +73,7 @@ public class KNNClassifier extends Classifier{
                 if(instanceLHS.stringValue(i).equals(instanceRHS.stringValue(i))) {
                     distance += 0;    
                 }
-                    distance += 1;            
+                    distance += 5;            
             }
         }
         
@@ -84,7 +84,7 @@ public class KNNClassifier extends Classifier{
         map = new TreeMap<>();
         
         for(int i = 0; i < data.numInstances(); i++)
-            map.put(ManhattenDistance(data.instance(i), instance), (int)(data.instance(i).classValue()));
+            map.put(EuclideanDistance(data.instance(i), instance), (int)(data.instance(i).classValue()));
     }
     
     double ManhattenDistance(Instance instanceLHS, Instance instanceRHS){
@@ -94,9 +94,9 @@ public class KNNClassifier extends Classifier{
                 distance += abs(instanceLHS.value(i) - instanceRHS.value(i));
             } else{
                 if(instanceLHS.stringValue(i).equals(instanceRHS.stringValue(i))) {
-                    distance += 0;    
+                    distance = 0;    
                 }
-                    distance += 1;            
+                    distance += 5;            
             }
         }
         

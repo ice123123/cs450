@@ -19,8 +19,8 @@ import weka.filters.unsupervised.attribute.Standardize;
  */
 public class ExperimentShell {
 
-    static final String file = "lib/iris.csv";
-    //static final String file = "lib/carData.csv";
+    //static final String file = "lib/iris.csv";
+    static final String file = "lib/carData.csv";
     
     
     /**
