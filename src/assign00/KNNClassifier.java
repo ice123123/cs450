@@ -7,7 +7,6 @@ package assign00;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
-import java.util.Map;
 import java.util.TreeMap;
 import weka.classifiers.Classifier;
 import weka.core.Instance;
@@ -20,7 +19,7 @@ import weka.core.Instances;
 public class KNNClassifier extends Classifier{
 
     
-    Integer k = 5;
+    Integer k = 10;
     Instances data;
     TreeMap<Double,Integer> map;
     
@@ -59,8 +58,7 @@ public class KNNClassifier extends Classifier{
             }
             i++;
         }
-        
-        System.out.println(highestIndex);
+
         return highestIndex;
     }
     
@@ -72,8 +70,9 @@ public class KNNClassifier extends Classifier{
             } else {
                 if(instanceLHS.stringValue(i).equals(instanceRHS.stringValue(i))) {
                     distance += 0;    
+                } else {
+                    distance += 1;
                 }
-                    distance += 5;            
             }
         }
         
@@ -92,11 +91,12 @@ public class KNNClassifier extends Classifier{
         for(int i = 0; i < instanceLHS.numAttributes() -1 && i < instanceRHS.numAttributes() - 1 ; i++){
             if(instanceLHS.attribute(i).isNumeric() && instanceRHS.attribute(i).isNumeric()){
                 distance += abs(instanceLHS.value(i) - instanceRHS.value(i));
-            } else{
+            } else {
                 if(instanceLHS.stringValue(i).equals(instanceRHS.stringValue(i))) {
-                    distance = 0;    
+                    distance += 0;    
+                } else {
+                    distance += 1;
                 }
-                    distance += 5;            
             }
         }
         
