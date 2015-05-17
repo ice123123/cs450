@@ -21,8 +21,12 @@ public class ExperimentShell {
 
     //static final String file = "lib/iris.csv";
     //static final String file = "lib/carData.csv";
-    static final String file = "lib/houseVotes.csv";
+    //static final String file = "lib/houseVotes.csv";
     //static final String file = "lib/houseVotesTest.csv";
+    //static final String file = "lib/lenses.csv";
+    //static final String file = "lib/chess.csv";
+    //static final String file = "lib/irisDiscrete4Bucket.csv";
+    static final String file = "lib/irisDiscrete2Bucket.csv";
     
     /**
      * @param args the command line arguments
