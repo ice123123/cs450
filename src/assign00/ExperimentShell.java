@@ -20,8 +20,9 @@ import weka.filters.unsupervised.attribute.Standardize;
 public class ExperimentShell {
 
     //static final String file = "lib/iris.csv";
-    static final String file = "lib/carData.csv";
-    
+    //static final String file = "lib/carData.csv";
+    static final String file = "lib/houseVotes.csv";
+    //static final String file = "lib/houseVotesTest.csv";
     
     /**
      * @param args the command line arguments
@@ -48,11 +49,11 @@ public class ExperimentShell {
         Instances newTest = Filter.useFilter(test, standardizedData);
         Instances newTraining = Filter.useFilter(training, standardizedData);
         
-        KNNClassifier knn = new KNNClassifier();
-        knn.buildClassifier(newTraining);
+        DecisionTreeClassifier ID3 = new DecisionTreeClassifier();
+        ID3.buildClassifier(newTraining);
         
         Evaluation eval = new Evaluation(newTraining);
-        eval.evaluateModel(knn, newTest);
+        eval.evaluateModel(ID3, newTest);
         
         System.out.println(eval.toSummaryString("\nResults\n======\n", false));
     }
